@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/headerGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="32dp">
+
+
+        <TextView
+            android:id="@+id/cardName"
+            style="@style/BaseText.Dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Карта для самозанятых" />
+
+        <TextView
+            android:id="@+id/cardPan"
+            style="@style/BaseText.Dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_toEndOf="@id/cardName"
+            tools:text="•••8888" />
+
+        <TextView
+            android:id="@+id/cardBalance"
+            style="@style/BaseText.Dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cardName"
+            android:textSize="40sp"
+            tools:text="30 000" />
+
+        <TextView
+            style="@style/BaseText.Dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_alignTop="@id/cardBalance"
+            android:layout_toRightOf="@id/cardBalance"
+            android:text="@string/ruble_symbol"
+            android:textSize="24sp" />
+
+    </RelativeLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/headerGroup"
+        android:layout_marginBottom="-16dp"
+        android:translationY="-16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="4dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/dashboardOptionsRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_dashboard_option" />
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

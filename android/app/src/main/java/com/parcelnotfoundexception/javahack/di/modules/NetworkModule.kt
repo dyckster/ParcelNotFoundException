@@ -1,8 +1,8 @@
 package com.parcelnotfoundexception.javahack.di.modules
 
 import android.content.Context
-import com.parcelnotfoundexception.javahack.di.PerApplication
 import com.parcelnotfoundexception.javahack.data.network.JavaHackApi
+import com.parcelnotfoundexception.javahack.di.PerApplication
 import dagger.Module
 import dagger.Provides
 import io.reactivex.schedulers.Schedulers
@@ -41,7 +41,7 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(httpClient)
-            .baseUrl("")
+            .baseUrl("https://www.google.com")
             .build()
             .create(JavaHackApi::class.java)
     }

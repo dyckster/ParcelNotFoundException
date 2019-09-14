@@ -1,11 +1,25 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+    </style>
+
+    <style name="BaseText">
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+
+    <style name="BaseText.Dark">
+        <item name="android:textColor">@color/colorTextDark</item>
+    </style>
+
+    <style name="BaseText.Light">
+        <item name="android:textColor">@color/colorTextLight</item>
+
     </style>
 
 </resources>

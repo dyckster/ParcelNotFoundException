@@ -1,5 +1,6 @@
 package com.parcelnotfoundexception.javahack
 
+import com.parcelnotfoundexception.javahack.di.DaggerAppComponent
 import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 

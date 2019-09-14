@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">JavaHack</string>
+    <string name="ruble_symbol">₽</string>
+    <string name="tax">Налог</string>
 </resources>

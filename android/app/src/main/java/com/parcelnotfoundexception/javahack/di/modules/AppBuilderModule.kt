@@ -1,7 +1,8 @@
 package com.parcelnotfoundexception.javahack.di.modules
 
 import com.parcelnotfoundexception.javahack.di.PerActivity
-import com.parcelnotfoundexception.javahack.presentation.first.FirstActivity
+import com.parcelnotfoundexception.javahack.presentation.dashboard.DashboardActivity
+import com.parcelnotfoundexception.javahack.presentation.timeline.TimelineActivity
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -10,6 +11,9 @@ interface AppBuilderModule {
 
     @PerActivity
     @ContributesAndroidInjector
-    fun provideFirstActivityFactory(): FirstActivity
+    fun provideDashboardActivityFactory(): DashboardActivity
 
+    @PerActivity
+    @ContributesAndroidInjector
+    fun provideTimelineActivityFactory(): TimelineActivity
 }

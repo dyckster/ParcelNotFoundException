@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/eventIcon"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        tools:src="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:id="@+id/descriptionGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_toRightOf="@id/eventIcon"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/eventTitle"
+            style="@style/BaseText.Dark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            tools:text="Перевод с карты" />
+
+        <TextView
+            android:id="@+id/eventSubtitle"
+            style="@style/BaseText.Light"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:text="*8686"
+            tools:visibility="visible" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/eventSum"
+        style="@style/BaseText.Dark"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="18sp"
+        tools:text="+ 5 000₽" />
+
+    <TextView
+        android:id="@+id/taxAmount"
+        style="@style/BaseText.Light"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/eventSum"
+        android:layout_alignEnd="@id/eventSum"
+        android:layout_marginTop="8dp"
+        android:textSize="12sp"
+        tools:text="24₽" />
+
+    <TextView
+        android:id="@+id/taxPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/taxAmount"
+        android:layout_alignBottom="@id/taxAmount"
+        android:layout_marginRight="4dp"
+        android:layout_toLeftOf="@id/taxAmount"
+        android:background="@drawable/shape_rounded_yellow_10dp"
+        android:gravity="center"
+        android:paddingLeft="4dp"
+        android:paddingTop="2dp"
+        android:paddingRight="4dp"
+        android:paddingBottom="2dp"
+        android:textColor="@color/colorTextDark"
+        android:textSize="10sp"
+        tools:text="4%" />
+
+</RelativeLayout>
