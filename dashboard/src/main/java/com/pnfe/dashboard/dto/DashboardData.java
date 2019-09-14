@@ -7,5 +7,5 @@ import java.util.List;
 @Data
 public class DashboardData {
     private UserInfo user;
-    private List<CardView> cards;
+    private List<Account> accounts;
 }

@@ -4,9 +4,12 @@ import com.pnfe.dashboard.dto.CardType;
 import com.pnfe.dashboard.dto.CardView;
 import com.pnfe.dashboard.dto.DashboardData;
 import com.pnfe.dashboard.dto.UserInfo;
+import com.pnfe.dashboard.service.AuthService;
+import com.pnfe.dashboard.service.DashboardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestHeader;
@@ -22,31 +25,26 @@ import java.util.List;
 @Api("Данные для мобильного приложения")
 public class DashboardResource {
 
+    @Autowired
+    AuthService authService;
+
+    @Autowired
+    DashboardService dashboardService;
+
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     @ApiOperation(value = "Получение данных для главного экрана", response = DashboardData.class)
     public ResponseEntity<DashboardData> dashboardData(@ApiParam(value = "USER-ID")
-                                                       @RequestHeader(value = HttpHeaders.USER_AGENT, required = false)
+                                                       @RequestHeader(value = "USER-ID", required = true)
                                                                String userId) {
-        DashboardData dashboardData = new DashboardData();
 
-        UserInfo userInfo = new UserInfo();
-        userInfo.setFullName("Иванов Иван Иванович");
-        List<String> properties = new ArrayList<>();
-        properties.add("SELF_EMPLOYED");
-
-        CardView cardView = new CardView();
-        cardView.setAvailableLimitAmount(10000L);
-        cardView.setCardType(CardType.VIRTUAL);
-        cardView.setDisplayName("Карта для бизнеса");
-        cardView.setPanTail("*0173");
-
-        List<CardView> cardViewList = new ArrayList<>();
-        cardViewList.add(cardView);
-
-        userInfo.setUserProperties(properties);
-        dashboardData.setUser(userInfo);
-        dashboardData.setCards(cardViewList);
-        return ResponseEntity.ok(dashboardData);
+        UserInfo userInfo = authService.retrieveUserInfo(userId);
+        if (userInfo != null) {
+            DashboardData dashboardData = new DashboardData();
+            dashboardData.setUser(userInfo);
+            dashboardData.setAccounts(dashboardService.getAccounts(userId));
+            return ResponseEntity.ok(dashboardData);
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 

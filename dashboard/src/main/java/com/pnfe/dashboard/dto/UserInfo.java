@@ -9,7 +9,7 @@ import java.util.List;
 public class UserInfo {
     @ApiModelProperty(required = true, value = "Полное имя пользователя")
     private String fullName;
-    @ApiModelProperty(required = true, value = "Набор свойств пользователя: INDIVIDUAL,CORPORATE,SELF_EMPLOYED")
-    private List<String> userProperties;
+    @ApiModelProperty(required = true, value = "Тип пользователя: INDIVIDUAL,CORPORATE,SELF_EMPLOYED")
+    private String profileType;
 
 }
