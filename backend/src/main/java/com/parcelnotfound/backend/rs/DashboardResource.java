@@ -27,7 +27,7 @@ public class DashboardResource {
                     @ApiResponse(code = 500, message = "Ошибка обработки запроса")
             }
     )
-    public ResponseEntity dashboardContract(@ApiParam(value = "Канал запроса", required = true)
+    public ResponseEntity cardRequisites(@ApiParam(value = "Канал запроса", required = true)
                                             @PathVariable("cardId") @NotNull
                                                     String cardId) {
         try {
