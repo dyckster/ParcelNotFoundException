@@ -23,5 +23,7 @@ public class AccountsEntity {
     @Column(name = "accountnumber")
     private String accountNumber;
     @Column(name = "bik")
-    private String bik;
+    private String bankBik;
+    @Column(name = "client_bik")
+    private String clientBik;
 }

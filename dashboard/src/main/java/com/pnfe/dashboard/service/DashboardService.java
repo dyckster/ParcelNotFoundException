@@ -25,11 +25,13 @@ public class DashboardService {
             List<Account> accountList = new ArrayList<>();
             Account account = new Account();
 
-            Requisite requisites = new Requisite();
-            requisites.setAccountNumber(accountsEntity.get().getAccountNumber());
-            requisites.setBik(accountsEntity.get().getBik());
-            requisites.setInn(accountsEntity.get().getInn());
-            requisites.setOgrnip(accountsEntity.get().getOgrnip());
+            Requisite requisites = new Requisite(
+                    accountsEntity.get().getInn(),
+                    accountsEntity.get().getOgrnip(),
+                    accountsEntity.get().getAccountNumber(),
+                    accountsEntity.get().getBankBik(),
+                    accountsEntity.get().getClientBik()
+            );
             account.setRequisites(requisites);
 
             account.setAccountId(accountsEntity.get().getAccountId());
