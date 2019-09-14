@@ -2,6 +2,7 @@ package com.parcelnotfound.backend.rs;
 
 
 import com.parcelnotfound.backend.dto.CardRequisites;
+import com.parcelnotfound.backend.entity.Test;
 import com.parcelnotfound.backend.exception.CardNotFoundException;
 import com.parcelnotfound.backend.service.RequisitesService;
 import io.swagger.annotations.*;
@@ -28,8 +29,8 @@ public class DashboardResource {
             }
     )
     public ResponseEntity cardRequisites(@ApiParam(value = "Канал запроса", required = true)
-                                            @PathVariable("cardId") @NotNull
-                                                    String cardId) {
+                                         @PathVariable("cardId") @NotNull
+                                                 String cardId) {
         try {
             CardRequisites cardRequisites = requisitesService.getCardRequisites(cardId);
             return ResponseEntity.ok(cardRequisites);
@@ -37,4 +38,18 @@ public class DashboardResource {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @RequestMapping(value = "/cards/", method = RequestMethod.GET)
+    @ApiOperation(value = "Метод для получения карт пользователя", response = CardRequisites.class)
+    @ApiResponses(value =
+            {
+                    @ApiResponse(code = 404, message = "Карта с переданным ID не найдена"),
+                    @ApiResponse(code = 500, message = "Ошибка обработки запроса")
+            }
+    )
+    public ResponseEntity cards() {
+        Test test = requisitesService.testJpa();
+        return ResponseEntity.ok(test);
+    }
+
 }
