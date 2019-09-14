@@ -66,11 +66,11 @@
                     <apiSources>
                         <apiSource>
                             <springmvc>true</springmvc>
-                            <locations>ru.pochtabank.dbo2.dashboardservice.rs</locations>
+                            <locations>com.parcelnotfound.backend.rs</locations>
                             <schemes>http</schemes>
                             <basePath>/</basePath>
                             <info>
-                                <title>DashboardService</title>
+                                <title>ParcelNotFoundService</title>
                                 <version>${project.version}</version>
                             </info>
                             <templatePath>${basedir}/swagger-templates/strapdown.html.hbs</templatePath>
