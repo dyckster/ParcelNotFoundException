@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class FnsService {
+
     @Autowired
     FnsDao fnsDao;
 

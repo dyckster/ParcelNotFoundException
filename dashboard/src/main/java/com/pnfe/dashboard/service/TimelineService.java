@@ -17,11 +17,12 @@ import java.util.stream.Collectors;
 @Service
 public class TimelineService {
 
+    @Autowired
+    OperationsRepository operationsRepository;
+
     public static final long ZERO_RUB = 0L;
     public static final double INDIVIDUAL_TAX_PERCENT = 4.0;
     public static final double BUSINESS_TAX_AMOUNT = 6.0;
-    @Autowired
-    OperationsRepository operationsRepository;
 
 
     public OperationsView getTimeline(String cardId) {
