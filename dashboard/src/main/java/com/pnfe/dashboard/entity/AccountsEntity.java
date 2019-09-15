@@ -13,7 +13,7 @@ import javax.persistence.Table;
 public class AccountsEntity {
     @Id
     @Column(name = "user_id")
-    private String id;
+    private String userId;
     @Column(name = "account_id")
     private String accountId;
     @Column(name = "inn")

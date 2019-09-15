@@ -7,6 +7,6 @@ public class CardView {
     private String id;
     private String displayName;
     private long availableLimitAmount;
-    private CardType cardType;
+    private String cardType;
     private String panTail;
 }
