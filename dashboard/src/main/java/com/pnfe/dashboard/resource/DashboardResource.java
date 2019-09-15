@@ -1,25 +1,16 @@
 package com.pnfe.dashboard.resource;
 
-import com.pnfe.dashboard.dao.FnsDao;
 import com.pnfe.dashboard.dto.*;
 import com.pnfe.dashboard.dto.fns.CompanyDescription;
-import com.pnfe.dashboard.dto.fns.FnsSearchResponse;
-import com.pnfe.dashboard.dto.fns.FnsSearchResult;
-import com.pnfe.dashboard.entity.OperationEntity;
-import com.pnfe.dashboard.service.AuthService;
-import com.pnfe.dashboard.service.DashboardService;
-import com.pnfe.dashboard.service.FnsService;
-import com.pnfe.dashboard.service.TimelineService;
+import com.pnfe.dashboard.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -38,6 +29,9 @@ public class DashboardResource {
 
     @Autowired
     FnsService fnsService;
+
+    @Autowired
+    StoriesService storiesService;
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     @ApiOperation(value = "Получение данных для главного экрана", response = DashboardData.class)
@@ -94,6 +88,39 @@ public class DashboardResource {
         }
         return ResponseEntity.badRequest().build();
     }
+
+    @RequestMapping(value = "/stories", method = RequestMethod.GET)
+    @ApiOperation(value = "Получение контента для историй", response = Story.class)
+    public ResponseEntity<List<Story>> stories(@ApiParam(value = "USER-ID")
+                                                         @RequestHeader(value = "USER-ID", required = true)
+                                                                 String userId) {
+
+        UserInfo userInfo = authService.retrieveUserInfo(userId);
+        if (userInfo != null) {
+            return ResponseEntity.ok(storiesService.getStories(userId));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
+    @RequestMapping(value = "/stories/view/{storyId}", method = RequestMethod.PUT)
+    @ApiOperation(value = "Получение контента для историй")
+    public ResponseEntity<List<Story>> stories(@ApiParam(value = "USER-ID")
+                                               @RequestHeader(value = "USER-ID", required = true)
+                                                       String userId, @PathVariable("storyId") @NotNull
+            String storyId) {
+
+        UserInfo userInfo = authService.retrieveUserInfo(userId);
+        if (userInfo != null) {
+            try {
+                storiesService.setStoryRead(storyId);
+            } catch (IllegalArgumentException e) {
+                e.printStackTrace();
+            }
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 
 
 }
