@@ -1,6 +1,6 @@
 package com.parcelnotfoundexception.javahack.presentation.timeline.adapter
 
-import com.parcelnotfoundexception.javahack.domain.model.TimelineEvent
+import com.parcelnotfoundexception.javahack.domain.model.timeline.TimelineEvent
 import com.parcelnotfoundexception.javahack.util.separateThousands
 import java.text.SimpleDateFormat
 import java.util.*

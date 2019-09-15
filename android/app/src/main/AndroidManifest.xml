@@ -21,5 +21,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".presentation.timeline.TimelineActivity" />
+        <activity android:name=".presentation.story.ArticleStoryActivity" />
     </application>
 </manifest>

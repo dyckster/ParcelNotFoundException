@@ -1,5 +1,7 @@
 package com.parcelnotfoundexception.javahack.presentation.dashboard
 
+import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -7,12 +9,16 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.zxing.BarcodeFormat
 import com.journeyapps.barcodescanner.BarcodeEncoder
 import com.parcelnotfoundexception.javahack.R
-import com.parcelnotfoundexception.javahack.domain.model.Client
+import com.parcelnotfoundexception.javahack.domain.model.dashboard.Article
+import com.parcelnotfoundexception.javahack.domain.model.dashboard.Client
 import com.parcelnotfoundexception.javahack.presentation.BaseActivity
 import com.parcelnotfoundexception.javahack.presentation.dashboard.adapter.ClientsAdapter
 import com.parcelnotfoundexception.javahack.presentation.dashboard.adapter.OptionItem
+import com.parcelnotfoundexception.javahack.presentation.dashboard.adapter.RecommendationsAdapter
 import com.parcelnotfoundexception.javahack.presentation.dashboard.adapter.RequisitesAdapter
+import com.parcelnotfoundexception.javahack.presentation.story.ArticleStoryActivity
 import com.parcelnotfoundexception.javahack.presentation.timeline.TimelineActivity
+import com.parcelnotfoundexception.javahack.util.copyText
 import com.parcelnotfoundexception.javahack.util.hide
 import com.parcelnotfoundexception.javahack.util.show
 import com.parcelnotfoundexception.javahack.util.toPx
@@ -20,7 +26,6 @@ import kotlinx.android.synthetic.main.activity_dashboard.*
 import kotlinx.android.synthetic.main.fragment_requisites.*
 import javax.inject.Inject
 import javax.inject.Provider
-
 
 class DashboardActivity : BaseActivity(), DashboardView {
 
@@ -35,6 +40,8 @@ class DashboardActivity : BaseActivity(), DashboardView {
 
     private val requisitesAdapter = RequisitesAdapter()
     private val clientAdapter = ClientsAdapter()
+    private val recommendationsAdapter =
+        RecommendationsAdapter { ArticleStoryActivity.start(this, it.first, it.second) }
 
     private val sheetBehaviour: BottomSheetBehavior<CardView> by lazy {
         BottomSheetBehavior.from(
@@ -55,6 +62,11 @@ class DashboardActivity : BaseActivity(), DashboardView {
         analyticsButton.setOnClickListener { presenter.onMenuOptionClick(OptionItem.HISTORY) }
         qrButton.setOnClickListener { presenter.onMenuOptionClick(OptionItem.QR_CODE) }
         analyticGroup.setOnClickListener { presenter.onMenuOptionClick(OptionItem.HISTORY) }
+        recommendationsList.adapter = recommendationsAdapter
+        clientInn.setOnClickListener {
+            (it as TextView).copyText()
+            Toast.makeText(this, "ИНН скопирован в буфер обмена", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun showAnalyticsSection(month: String, expectedIncome: String, expectedTax: String) {
@@ -125,6 +137,11 @@ class DashboardActivity : BaseActivity(), DashboardView {
         qrGroup.hide()
         requisitesAdapter.items = values
     }
+
+    override fun showArticle(articles: List<Article>) {
+        recommendationsAdapter.articles = articles
+    }
+
 
     override fun showQrCode(link: String) {
         qrGroup.show()

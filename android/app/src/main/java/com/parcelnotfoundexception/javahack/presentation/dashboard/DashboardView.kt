@@ -1,7 +1,8 @@
 package com.parcelnotfoundexception.javahack.presentation.dashboard
 
 import com.arellomobile.mvp.MvpView
-import com.parcelnotfoundexception.javahack.domain.model.Client
+import com.parcelnotfoundexception.javahack.domain.model.dashboard.Article
+import com.parcelnotfoundexception.javahack.domain.model.dashboard.Client
 
 interface DashboardView : MvpView {
 
@@ -24,5 +25,7 @@ interface DashboardView : MvpView {
     fun showQrCode(link: String)
 
     fun openTimeline(cardId: String)
+
+    fun showArticle(articles: List<Article>)
 
 }

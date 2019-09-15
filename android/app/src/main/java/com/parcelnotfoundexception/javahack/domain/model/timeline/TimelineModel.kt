@@ -1,4 +1,4 @@
-package com.parcelnotfoundexception.javahack.domain.model
+package com.parcelnotfoundexception.javahack.domain.model.timeline
 
 import com.google.gson.annotations.SerializedName
 

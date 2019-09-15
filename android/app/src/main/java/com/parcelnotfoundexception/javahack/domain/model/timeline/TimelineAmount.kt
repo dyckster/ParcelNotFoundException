@@ -1,4 +1,4 @@
-package com.parcelnotfoundexception.javahack.domain.model
+package com.parcelnotfoundexception.javahack.domain.model.timeline
 
 data class TimelineAmount(
     val amount: Long,

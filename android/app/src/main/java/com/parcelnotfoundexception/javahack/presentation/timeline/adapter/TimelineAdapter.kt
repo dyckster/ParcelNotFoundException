@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.parcelnotfoundexception.javahack.R
-import com.parcelnotfoundexception.javahack.domain.model.TimelineEvent
+import com.parcelnotfoundexception.javahack.domain.model.timeline.TimelineEvent
 
 class TimelineAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
