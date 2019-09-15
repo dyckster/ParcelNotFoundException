@@ -3,7 +3,7 @@ package com.parcelnotfoundexception.javahack.presentation.timeline.adapter
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.parcelnotfoundexception.javahack.domain.model.TimelineEvent
+import com.parcelnotfoundexception.javahack.domain.model.timeline.TimelineEvent
 import com.parcelnotfoundexception.javahack.util.hide
 import com.parcelnotfoundexception.javahack.util.separateThousands
 import com.parcelnotfoundexception.javahack.util.show

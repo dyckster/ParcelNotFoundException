@@ -1,4 +1,4 @@
-package com.parcelnotfoundexception.javahack.domain.model
+package com.parcelnotfoundexception.javahack.domain.model.dashboard
 
 enum class ProfileType {
     INDIVIDUAL,

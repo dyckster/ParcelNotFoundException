@@ -1,6 +1,6 @@
 package com.parcelnotfoundexception.javahack.domain.repository
 
-import com.parcelnotfoundexception.javahack.domain.model.TimelineModel
+import com.parcelnotfoundexception.javahack.domain.model.timeline.TimelineModel
 import io.reactivex.Single
 
 interface TimelineRepository {

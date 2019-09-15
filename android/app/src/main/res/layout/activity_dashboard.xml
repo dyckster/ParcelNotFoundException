@@ -61,7 +61,6 @@
                 android:layout_marginLeft="4dp"
                 android:layout_toRightOf="@id/clientInnTitle"
                 android:fontFamily="sans-serif-medium"
-                android:textIsSelectable="true"
                 tools:text="128218182" />
 
             <ImageView
@@ -91,12 +90,12 @@
                 android:translationY="-16dp"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="0dp"
+                app:contentPaddingBottom="76dp"
                 app:contentPaddingTop="30dp">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
 
                     <LinearLayout
                         android:id="@+id/analyticsAndPayGroup"
@@ -227,7 +226,7 @@
                     <androidx.cardview.widget.CardView
                         android:id="@+id/cardGroup"
                         android:layout_width="match_parent"
-                        android:layout_height="226dp"
+                        android:layout_height="216dp"
                         android:layout_below="@id/cardNameText"
                         android:layout_gravity="center_horizontal"
                         android:layout_marginLeft="16dp"
@@ -239,6 +238,7 @@
                         <com.airbnb.lottie.LottieAnimationView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:adjustViewBounds="true"
                             android:scaleType="centerCrop"
                             app:lottie_autoPlay="true"
                             app:lottie_fileName="card_animation.json"
@@ -254,7 +254,9 @@
 
                         <RelativeLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp">
 
                             <TextView
                                 android:id="@+id/cardType"
@@ -273,11 +275,20 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_alignParentRight="true"
+                                android:layout_alignParentBottom="true"
                                 android:layout_marginLeft="8dp"
-                                android:paddingTop="20dp"
+                                android:layout_marginBottom="32dp"
                                 android:paddingRight="16dp"
                                 android:textSize="16sp"
                                 tools:text="•••8888" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignBottom="@id/cardType"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginRight="16dp"
+                                android:src="@drawable/ic_gpay_icon_white" />
 
                             <TextView
                                 android:id="@+id/cardBalanceText"
@@ -375,6 +386,43 @@
                         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         tools:listitem="@layout/item_dashboard_client" />
 
+                    <TextView
+                        android:id="@+id/recommendationsTitle"
+                        style="@style/BaseText.Dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/myClientsList"
+                        android:layout_marginTop="40dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:text="Специально для вас"
+                        android:textSize="24sp" />
+
+                    <ImageView
+                        style="?attr/actionButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/recommendationsTitle"
+                        android:layout_alignBottom="@id/recommendationsTitle"
+                        android:layout_alignParentRight="true"
+                        android:paddingRight="16dp"
+                        android:src="@drawable/ic_chevron_grey_24dp"
+                        android:tint="@color/colorDark" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/recommendationsList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/recommendationsTitle"
+                        android:layout_marginTop="16dp"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_dashboard_recommendation" />
 
                 </RelativeLayout>
 

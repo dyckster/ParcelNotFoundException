@@ -1,11 +1,16 @@
 package com.parcelnotfoundexception.javahack.util
 
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Context
+import android.content.Context.CLIPBOARD_SERVICE
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.TextView
 import androidx.annotation.LayoutRes
+
 
 fun ViewGroup.inflate(@LayoutRes layoutId: Int, attachToRoot: Boolean = false): View =
     LayoutInflater.from(context).inflate(layoutId, this, attachToRoot)
@@ -48,3 +53,9 @@ fun View.showKeyboard() {
 fun Int.toDp(context: Context): Int = DipUtil.convertPixelsToDp(context, this.toFloat()).toInt()
 
 fun Int.toPx(context: Context): Int = DipUtil.convertDpToPixel(context, this.toFloat()).toInt()
+
+fun TextView.copyText() {
+    val clipboard = this.context.getSystemService(CLIPBOARD_SERVICE) as ClipboardManager?
+    val clip = ClipData.newPlainText("ИНН", this.text)
+    clipboard?.setPrimaryClip(clip)
+}

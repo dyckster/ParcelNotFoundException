@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.parcelnotfoundexception.javahack.R
-import com.parcelnotfoundexception.javahack.domain.model.Client
+import com.parcelnotfoundexception.javahack.domain.model.dashboard.Client
 import kotlinx.android.synthetic.main.item_dashboard_client.view.*
 
 class ClientsAdapter : RecyclerView.Adapter<ClientViewHolder>() {

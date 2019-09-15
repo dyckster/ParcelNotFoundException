@@ -1,7 +1,7 @@
 package com.parcelnotfoundexception.javahack.presentation.timeline
 
 import com.arellomobile.mvp.InjectViewState
-import com.parcelnotfoundexception.javahack.domain.model.TotalAmount
+import com.parcelnotfoundexception.javahack.domain.model.timeline.TotalAmount
 import com.parcelnotfoundexception.javahack.domain.repository.TimelineRepository
 import com.parcelnotfoundexception.javahack.presentation.BasePresenter
 import com.parcelnotfoundexception.javahack.presentation.timeline.adapter.TimelineListMapper
@@ -46,7 +46,7 @@ class TimelinePresenter @Inject constructor() : BasePresenter<TimelineView>() {
             val expense = getMonthlyDebit().getSumForMonth(selectedMonth) / 100
             val tax = getMonthlyTax().getSumForMonth(selectedMonth) / 100
 
-            val baseIncome = income + expense + tax
+            val baseIncome = income + expense - tax
 
             viewState.onMonthDataSelected(
                 "${baseIncome.separateThousands()} ₽",

@@ -1,4 +1,4 @@
-package com.parcelnotfoundexception.javahack.domain.model
+package com.parcelnotfoundexception.javahack.domain.model.contract
 
 data class RequisitesModel(
     val inn: String,

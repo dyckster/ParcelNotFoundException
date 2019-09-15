@@ -1,15 +1,18 @@
 package com.parcelnotfoundexception.javahack.presentation.dashboard
 
 import com.arellomobile.mvp.InjectViewState
-import com.parcelnotfoundexception.javahack.domain.model.*
+import com.parcelnotfoundexception.javahack.domain.model.contract.Account
+import com.parcelnotfoundexception.javahack.domain.model.contract.Card
+import com.parcelnotfoundexception.javahack.domain.model.contract.CardType
+import com.parcelnotfoundexception.javahack.domain.model.dashboard.Client
+import com.parcelnotfoundexception.javahack.domain.model.dashboard.UserInfo
+import com.parcelnotfoundexception.javahack.domain.repository.ArticleRepository
 import com.parcelnotfoundexception.javahack.domain.repository.DashboardRepository
 import com.parcelnotfoundexception.javahack.presentation.BasePresenter
 import com.parcelnotfoundexception.javahack.presentation.dashboard.adapter.OptionItem
 import com.parcelnotfoundexception.javahack.util.separateThousands
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
@@ -19,6 +22,8 @@ class DashboardPresenter @Inject constructor(
 
     @Inject
     lateinit var dashboardRepository: DashboardRepository
+    @Inject
+    lateinit var articlesRepository: ArticleRepository
 
     private var user: UserInfo? = null
     private var account: Account? = null
@@ -55,15 +60,59 @@ class DashboardPresenter @Inject constructor(
 
         viewState.showUserClients(
             listOf(
-                Client("1", "Наталья Сергеевна", "", "https://i.imgur.com/LokWmT8.png"),
-                Client("2", "Андрей Мальковский", "", "https://i.imgur.com/I5vN2hA.png"),
-                Client("3", "Кристина Кравцова", "", "https://i.imgur.com/zrRubpk.png"),
-                Client("3", "Юрий Домбаев", "", "https://i.imgur.com/DMAckN3.png"),
-                Client("3", "Виталий Сокирко", "", "https://i.imgur.com/4FnBiBJ.png"),
-                Client("4", "Анастасия Дмитриева", "", "https://i.imgur.com/t21Eh54.png"),
-                Client("6", "Николай Крючков", "", "https://i.imgur.com/iofoyOo.png")
+                Client(
+                    "1",
+                    "Наталья Сергеевна",
+                    "",
+                    "https://i.imgur.com/LokWmT8.png"
+                ),
+                Client(
+                    "2",
+                    "Андрей Мальковский",
+                    "",
+                    "https://i.imgur.com/I5vN2hA.png"
+                ),
+                Client(
+                    "3",
+                    "Кристина Кравцова",
+                    "",
+                    "https://i.imgur.com/zrRubpk.png"
+                ),
+                Client(
+                    "3",
+                    "Юрий Домбаев",
+                    "",
+                    "https://i.imgur.com/DMAckN3.png"
+                ),
+                Client(
+                    "3",
+                    "Виталий Сокирко",
+                    "",
+                    "https://i.imgur.com/4FnBiBJ.png"
+                ),
+                Client(
+                    "4",
+                    "Анастасия Дмитриева",
+                    "",
+                    "https://i.imgur.com/t21Eh54.png"
+                ),
+                Client(
+                    "6",
+                    "Николай Крючков",
+                    "",
+                    "https://i.imgur.com/iofoyOo.png"
+                )
             )
         )
+        articlesRepository.getArticles()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                viewState.showArticle(it)
+            }, {})
+            .also { disposable.add(it) }
+
+
     }
 
     fun onMenuOptionClick(optionItem: OptionItem) {
