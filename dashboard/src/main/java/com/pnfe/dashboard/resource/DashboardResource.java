@@ -63,14 +63,14 @@ public class DashboardResource {
 
     @RequestMapping(value = "/operations/{cardId}", method = RequestMethod.GET)
     @ApiOperation(value = "Получение ленты операций", response = DashboardData.class)
-    public ResponseEntity<List<OperationView>> operations(@ApiParam(value = "USER-ID")
+    public ResponseEntity<OperationsView> operations(@ApiParam(value = "USER-ID")
                                                             @RequestHeader(value = "USER-ID", required = true)
                                                                     String userId, @PathVariable("cardId") @NotNull
                                                                     String cardId) {
 
         UserInfo userInfo = authService.retrieveUserInfo(userId);
         if (userInfo != null) {
-            return ResponseEntity.ok(timelineService.getOperations(cardId));
+            return ResponseEntity.ok(timelineService.getTimeline(cardId));
         }
         return ResponseEntity.badRequest().build();
     }
