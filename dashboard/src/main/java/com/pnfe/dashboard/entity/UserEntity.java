@@ -15,5 +15,7 @@ public class UserEntity {
     private String fullName;
     @Column(name = "profile_type")
     private String profileType;
+    @Column(name="user_inn")
+    private String userInn;
 
 }
