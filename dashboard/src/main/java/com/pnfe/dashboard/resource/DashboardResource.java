@@ -103,7 +103,7 @@ public class DashboardResource {
     }
 
     @RequestMapping(value = "/stories/view/{storyId}", method = RequestMethod.PUT)
-    @ApiOperation(value = "Получение контента для историй")
+    @ApiOperation(value = "Пометить историю как прочитанную")
     public ResponseEntity<List<Story>> stories(@ApiParam(value = "USER-ID")
                                                @RequestHeader(value = "USER-ID", required = true)
                                                        String userId, @PathVariable("storyId") @NotNull
