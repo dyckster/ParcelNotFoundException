@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="4dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="4dp"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/clientAvatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        tools:src="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/clientName"
+        style="@style/BaseText.Dark"
+        android:layout_width="92dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:textSize="14sp"
+        tools:text="@tools:sample/full_names" />
+
+</LinearLayout>

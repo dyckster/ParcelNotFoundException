@@ -31,6 +31,8 @@ class TimelineAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount() = items.size
 
+    override fun getItemViewType(position: Int) = items[position].viewType.ordinal
+
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items[position]
         when (item.viewType) {

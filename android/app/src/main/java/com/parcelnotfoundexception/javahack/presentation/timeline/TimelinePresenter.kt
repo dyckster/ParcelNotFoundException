@@ -1,5 +1,6 @@
 package com.parcelnotfoundexception.javahack.presentation.timeline
 
+import com.arellomobile.mvp.InjectViewState
 import com.parcelnotfoundexception.javahack.domain.repository.TimelineRepository
 import com.parcelnotfoundexception.javahack.presentation.BasePresenter
 import com.parcelnotfoundexception.javahack.presentation.timeline.adapter.TimelineListMapper
@@ -8,7 +9,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class TimelinePresenter : BasePresenter<TimelineView>() {
+@InjectViewState
+class TimelinePresenter @Inject constructor() : BasePresenter<TimelineView>() {
 
     @Inject
     lateinit var timelineRepository: TimelineRepository
@@ -29,6 +31,12 @@ class TimelinePresenter : BasePresenter<TimelineView>() {
 
             })
             .also { disposable.add(it) }
+    }
+
+    fun onMonthSelected(selectedMonth: String) {
+        if (selectedMonth.isBlank()) return
+        viewState.onMonthDataSelected("30 000 ₽", "+ 50 000 ₽", "- 20 000 ₽", "– 3 000 ₽")
+
     }
 
 }

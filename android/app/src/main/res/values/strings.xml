@@ -2,4 +2,7 @@
     <string name="app_name">JavaHack</string>
     <string name="ruble_symbol">₽</string>
     <string name="tax">Налог</string>
+    <string name="action_share_requisites">Поделиться</string>
+    <string name="qr_requisites_text">Делитесь QR-кодом с вашими клиентами для оплаты ваших услуг</string>
+    <string name="title_analytics">Аналитика</string>
 </resources>

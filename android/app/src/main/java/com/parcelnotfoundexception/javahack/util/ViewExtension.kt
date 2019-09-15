@@ -44,3 +44,7 @@ fun View.showKeyboard() {
     imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
 }
 
+
+fun Int.toDp(context: Context): Int = DipUtil.convertPixelsToDp(context, this.toFloat()).toInt()
+
+fun Int.toPx(context: Context): Int = DipUtil.convertDpToPixel(context, this.toFloat()).toInt()

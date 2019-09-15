@@ -41,7 +41,7 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(httpClient)
-            .baseUrl("https://www.google.com")
+            .baseUrl("http://64e2c9b6.ngrok.io/api/")
             .build()
             .create(JavaHackApi::class.java)
     }
