@@ -7,6 +7,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +103,24 @@ public class TimelineService {
         totalAmount.setMonthlyTax(monthlyTax);
 
         return totalAmount;
+    }
+
+    public TimelineSummary getTimelineSummary(String cardId){
+        List<OperationView> operations = getOperations(cardId);
+        Long creditByCurrentMonth = operations
+                .stream()
+                .filter(op -> op.getAmount() > 0L && LocalDate.now().getMonth().equals(op.getOperDate().getMonth()))
+                .mapToLong(OperationView::getAmount)
+                .sum();
+
+        Long taxByCurrentMonth = operations
+                .stream()
+                .filter(op -> LocalDate.now().getMonth().equals(op.getOperDate().getMonth()))
+                .mapToLong(OperationView::getTaxAmount)
+                .sum();
+
+        return new TimelineSummary(creditByCurrentMonth, taxByCurrentMonth);
+
     }
 
     private double getTaxPercentage(String creditType) {

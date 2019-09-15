@@ -48,6 +48,10 @@ public class DashboardResource {
             DashboardData dashboardData = new DashboardData();
             dashboardData.setUser(userInfo);
             dashboardData.setAccounts(dashboardService.getAccounts(userId));
+            // Меня очень попросила наша дизайнер
+            String cardId = dashboardData.getAccounts().get(0).getCards().get(0).getId();
+
+            dashboardData.setTimelineSummary(timelineService.getTimelineSummary(cardId));
             return ResponseEntity.ok(dashboardData);
         }
         return ResponseEntity.badRequest().build();
