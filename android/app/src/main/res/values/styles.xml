@@ -1,12 +1,11 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="colorPrimary">@color/colorDark</item>
+        <item name="colorPrimaryDark">@color/colorDark</item>
+        <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
     <style name="BaseText">
@@ -19,7 +18,10 @@
 
     <style name="BaseText.Light">
         <item name="android:textColor">@color/colorTextLight</item>
+    </style>
 
+    <style name="BaseText.White">
+        <item name="android:textColor">@color/colorWhite</item>
     </style>
 
 </resources>

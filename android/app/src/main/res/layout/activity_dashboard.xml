@@ -1,77 +1,375 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/headerGroup"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
-        android:orientation="vertical"
-        android:paddingLeft="16dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="32dp">
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:orientation="vertical">
 
-
-        <TextView
-            android:id="@+id/cardName"
-            style="@style/BaseText.Dark"
-            android:layout_width="wrap_content"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            tools:text="Карта для самозанятых" />
+            android:background="@color/colorDark"
+            android:elevation="0dp"
+            app:navigationIcon="@drawable/ic_back_white_24dp"
+            app:title="Мой бизнес"
+            app:titleTextColor="@color/colorWhite" />
 
-        <TextView
-            android:id="@+id/cardPan"
-            style="@style/BaseText.Dark"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:id="@+id/headerGroup"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="8dp"
-            android:layout_toEndOf="@id/cardName"
-            tools:text="•••8888" />
+            android:layout_below="@id/toolbar"
+            android:background="@color/colorDark"
+            android:orientation="vertical"
+            android:paddingLeft="16dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="48dp">
 
-        <TextView
-            android:id="@+id/cardBalance"
-            style="@style/BaseText.Dark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/cardName"
-            android:textSize="40sp"
-            tools:text="30 000" />
+            <TextView
+                android:id="@+id/clientName"
+                style="@style/BaseText.White"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:paddingBottom="12dp"
+                android:textSize="32sp"
+                tools:text="Иванов Иван" />
 
-        <TextView
-            style="@style/BaseText.Dark"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_alignTop="@id/cardBalance"
-            android:layout_toRightOf="@id/cardBalance"
-            android:text="@string/ruble_symbol"
-            android:textSize="24sp" />
+            <TextView
+                android:id="@+id/clientInnTitle"
+                style="@style/BaseText.White"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/clientName"
+                android:text="ИНН" />
+
+            <TextView
+                android:id="@+id/clientInn"
+                style="@style/BaseText.White"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/clientName"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/clientInnTitle"
+                android:fontFamily="sans-serif-medium"
+                android:textIsSelectable="true"
+                tools:text="128218182" />
+
+            <ImageView
+                android:id="@+id/qrButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="8dp"
+                android:layout_marginRight="16dp"
+                android:background="@drawable/shape_circle_grey"
+                android:padding="12dp"
+                android:src="@drawable/ic_qr_code_dark_24dp"
+                android:tint="@color/colorWhite" />
+
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/headerGroup"
+            android:overScrollMode="never">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="-16dp"
+                android:translationY="-16dp"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:contentPaddingTop="30dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/analyticsTitle"
+                        style="@style/BaseText.Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="32dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="16dp"
+                        android:text="@string/title_analytics"
+                        android:textSize="24sp" />
+
+                    <ImageView
+                        android:id="@+id/analyticsButton"
+                        style="?attr/actionButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/analyticsTitle"
+                        android:layout_alignBottom="@id/analyticsTitle"
+                        android:layout_alignParentRight="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:src="@drawable/ic_chevron_grey_24dp"
+                        android:tint="@color/colorDark" />
+
+                    <TextView
+                        android:id="@+id/analyticsMonth"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/analyticsTitle"
+                        android:layout_alignBottom="@id/analyticsTitle"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_toRightOf="@id/analyticsTitle"
+                        android:background="@drawable/shape_rounded_light_64dp"
+                        android:gravity="center"
+                        android:paddingLeft="12dp"
+                        android:paddingRight="12dp"
+                        tools:text="Сентябрь" />
+
+                    <TextView
+                        android:id="@+id/expectedIncomeAmount"
+                        style="@style/BaseText.Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/analyticsTitle"
+                        android:layout_alignParentStart="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="16dp"
+                        android:textSize="30sp"
+                        tools:text="27 000 ₽" />
+
+                    <TextView
+                        android:id="@+id/expectedIncomeText"
+                        style="@style/BaseText.Light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/expectedIncomeAmount"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="16dp"
+                        android:text="Ожидаемая прибыль"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/expectedTaxAmount"
+                        style="@style/BaseText.Dark"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/expectedTaxText"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingRight="16dp"
+                        android:textSize="24sp"
+                        tools:text="3 000 ₽" />
+
+                    <TextView
+                        android:id="@+id/expectedTaxText"
+                        style="@style/BaseText.Light"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/cardNameText"
+                        android:layout_alignParentRight="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingRight="16dp"
+                        android:text="Ожидаемый налог"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/cardNameText"
+                        style="@style/BaseText.Dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/expectedIncomeText"
+                        android:layout_marginTop="40dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:textSize="24sp"
+                        tools:text="Карта для бизнеса" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="226dp"
+                        android:layout_below="@id/cardNameText"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginRight="16dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp">
+
+                        <com.airbnb.lottie.LottieAnimationView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="centerCrop"
+                            app:lottie_autoPlay="true"
+                            app:lottie_fileName="card_animation.json"
+                            app:lottie_loop="true"
+                            app:lottie_speed="0.6"
+                            tools:src="@tools:sample/backgrounds/scenic" />
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:alpha="0.2"
+                            android:src="@color/colorWhite" />
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <TextView
+                                android:id="@+id/cardType"
+                                style="@style/BaseText.White"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif-medium"
+                                android:paddingLeft="16dp"
+                                android:paddingTop="22dp"
+                                android:textSize="16sp"
+                                tools:text="Виртуальная" />
+
+                            <TextView
+                                android:id="@+id/cardPanText"
+                                style="@style/BaseText.White"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:layout_marginLeft="8dp"
+                                android:paddingTop="20dp"
+                                android:paddingRight="16dp"
+                                android:textSize="16sp"
+                                tools:text="•••8888" />
+
+                            <TextView
+                                android:id="@+id/cardBalanceText"
+                                style="@style/BaseText.White"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/cardType"
+                                android:layout_marginTop="12dp"
+                                android:fontFamily="sans-serif-medium"
+                                android:paddingLeft="16dp"
+                                android:textSize="34sp"
+                                tools:text="30 000" />
+
+                            <TextView
+                                style="@style/BaseText.White"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignTop="@id/cardBalanceText"
+                                android:layout_marginLeft="8dp"
+                                android:layout_toRightOf="@id/cardBalanceText"
+                                android:text="@string/ruble_symbol"
+                                android:textSize="34sp" />
+
+                            <LinearLayout
+                                android:id="@+id/requisitesButtonCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginLeft="18dp"
+                                android:layout_marginBottom="24dp"
+                                android:background="@drawable/shape_rounded_yellow_light_24dp"
+                                android:gravity="center"
+                                android:orientation="horizontal"
+                                android:paddingLeft="16dp"
+                                android:paddingRight="28dp">
+
+                                <ImageView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:src="@drawable/ic_qr_code_dark_24dp"
+                                    android:tint="@color/colorBlack" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="18dp"
+                                    android:fontFamily="sans-serif-medium"
+                                    android:paddingTop="12dp"
+                                    android:paddingBottom="12dp"
+                                    android:text="Реквизиты"
+                                    android:textColor="@color/colorTextDark" />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+                    <TextView
+                        android:id="@+id/myClientsTitle"
+                        style="@style/BaseText.Dark"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/cardGroup"
+                        android:layout_marginTop="40dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        android:text="Мои клиенты"
+                        android:textSize="24sp" />
+
+                    <ImageView
+                        style="?attr/actionButtonStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@id/myClientsTitle"
+                        android:layout_alignBottom="@id/myClientsTitle"
+                        android:layout_alignParentRight="true"
+                        android:paddingRight="16dp"
+                        android:src="@drawable/ic_chevron_grey_24dp"
+                        android:tint="@color/colorDark" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/myClientsList"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/myClientsTitle"
+                        android:layout_marginTop="16dp"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"
+                        android:paddingLeft="16dp"
+                        android:paddingRight="16dp"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/item_dashboard_client" />
+
+
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </ScrollView>
 
     </RelativeLayout>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/bottomSheetRequisites"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/headerGroup"
-        android:layout_marginBottom="-16dp"
-        android:translationY="-16dp"
+        android:layout_height="wrap_content"
         app:cardCornerRadius="16dp"
-        app:cardElevation="4dp">
+        app:cardElevation="4dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
+        tools:visibility="gone">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/dashboardOptionsRecycler"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="4"
-            tools:listitem="@layout/item_dashboard_option" />
+        <include layout="@layout/fragment_requisites" />
 
     </androidx.cardview.widget.CardView>
 
 
-</RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

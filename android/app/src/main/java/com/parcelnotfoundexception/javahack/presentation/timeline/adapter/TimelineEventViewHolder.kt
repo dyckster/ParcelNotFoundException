@@ -16,7 +16,13 @@ class TimelineEventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             Glide.with(this)
                 .load(event.image)
                 .into(eventIcon)
-            eventSum.text = event.amount.amount.toInt().separateThousands()
+            val amount = event.amount.amount.toInt()
+            val amountString = if (amount >= 0) {
+                "+ ${amount.separateThousands()} ₽"
+            } else {
+                "– ${amount.separateThousands()} ₽"
+            }
+            eventSum.text = amountString
             eventTitle.text = event.displayName
             eventSubtitle?.apply {
                 if (event.subtitle.isNullOrBlank()) {
@@ -31,8 +37,8 @@ class TimelineEventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 taxAmount.show()
                 taxPercent.show()
 
-                taxAmount.text = event.amount.taxAmount?.toInt()?.separateThousands() ?: ""
-                taxPercent.text = event.amount.taxPercent.toString()
+                taxAmount.text = "${event.amount.taxAmount?.toInt()?.separateThousands()} ₽"
+                taxPercent.text = "${event.amount.taxPercent.toString()} %"
             } else {
                 taxAmount.hide()
                 taxPercent.hide()

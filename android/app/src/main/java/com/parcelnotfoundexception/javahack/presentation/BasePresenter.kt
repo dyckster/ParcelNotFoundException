@@ -13,4 +13,5 @@ abstract class BasePresenter<VIEW : MvpView> : MvpPresenter<VIEW>() {
         disposable.clear()
     }
 
+
 }

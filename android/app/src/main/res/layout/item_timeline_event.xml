@@ -3,6 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
     android:orientation="vertical">
 
     <de.hdodenhof.circleimageview.CircleImageView
@@ -18,8 +21,9 @@
         android:id="@+id/descriptionGroup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignTop="@id/eventIcon"
+        android:layout_alignBottom="@id/eventIcon"
         android:layout_marginLeft="12dp"
-        android:layout_marginTop="20dp"
         android:layout_toRightOf="@id/eventIcon"
         android:gravity="center"
         android:orientation="vertical">
@@ -37,11 +41,9 @@
             style="@style/BaseText.Light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:textSize="14sp"
-            android:visibility="gone"
-            tools:text="*8686"
-            tools:visibility="visible" />
+            tools:text="*8686" />
     </LinearLayout>
 
     <TextView
@@ -78,7 +80,7 @@
         android:background="@drawable/shape_rounded_yellow_10dp"
         android:gravity="center"
         android:paddingLeft="4dp"
-        android:paddingTop="2dp"
+        android:paddingTop="1dp"
         android:paddingRight="4dp"
         android:paddingBottom="2dp"
         android:textColor="@color/colorTextDark"
