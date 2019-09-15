@@ -1,6 +1,7 @@
 package com.pnfe.dashboard.dao;
 
 import com.pnfe.dashboard.dto.fns.FnsSearchResponse;
+import lombok.Data;
 import org.apache.http.entity.ContentType;
 import org.slf4j.MDC;
 import org.springframework.http.HttpEntity;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@Data
 public class FnsDao {
 
 
