@@ -27,8 +27,10 @@ public class CardEntity {
     private String cardType;
     @Column (name = "pan")
     private String pan;
-    @Column (name = "exp_date")
-    private LocalDate expDate;
+    @Column (name = "expdate")
+    private String expDate;
     @Column (name = "cvc")
     private String cvc;
+    @Column (name = "replenish_url")
+    private String replenishUrl;
 }

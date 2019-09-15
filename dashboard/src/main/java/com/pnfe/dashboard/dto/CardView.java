@@ -9,4 +9,6 @@ public class CardView {
     private long availableLimitAmount;
     private String cardType;
     private String panTail;
+    private String replenishUrl;
+    private String expDate;
 }
