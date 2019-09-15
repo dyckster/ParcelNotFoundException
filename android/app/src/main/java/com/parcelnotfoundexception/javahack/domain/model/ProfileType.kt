@@ -1,6 +1,6 @@
 package com.parcelnotfoundexception.javahack.domain.model
 
-enum class UserProperty {
+enum class ProfileType {
     INDIVIDUAL,
     CORPORATE,
     SELF_EMPLOYED

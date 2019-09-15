@@ -7,6 +7,8 @@ interface TimelineView : MvpView {
 
     fun setItems(items: List<TimelineListItem>)
 
+    fun prepareMonths(months: List<String>)
+
     fun onMonthDataSelected(incomeBase: String, income: String, expense: String, tax: String)
 
 }

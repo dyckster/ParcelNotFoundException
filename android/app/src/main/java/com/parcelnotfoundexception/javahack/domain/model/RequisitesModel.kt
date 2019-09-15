@@ -1,7 +1,9 @@
 package com.parcelnotfoundexception.javahack.domain.model
 
 data class RequisitesModel(
-    val pan: String,
-    val cvc: String,
-    val date: String
+    val inn: String,
+    val ogrnip: String,
+    val accountNumber: String,
+    val bankBik: String,
+    val clientBik: String
 )

@@ -18,8 +18,9 @@
             android:layout_height="wrap_content"
             android:background="@color/colorDark"
             android:elevation="0dp"
+            android:translationZ="2dp"
             app:navigationIcon="@drawable/ic_back_white_24dp"
-            app:title="Мой бизнес"
+            app:title="Мое дело"
             app:titleTextColor="@color/colorWhite" />
 
         <RelativeLayout
@@ -96,100 +97,109 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <TextView
-                        android:id="@+id/analyticsTitle"
-                        style="@style/BaseText.Dark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="32dp"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="16dp"
-                        android:text="@string/title_analytics"
-                        android:textSize="24sp" />
+                    <RelativeLayout
+                        android:id="@+id/analyticGroup"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
 
-                    <ImageView
-                        android:id="@+id/analyticsButton"
-                        style="?attr/actionButtonStyle"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@id/analyticsTitle"
-                        android:layout_alignBottom="@id/analyticsTitle"
-                        android:layout_alignParentRight="true"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:paddingLeft="16dp"
-                        android:paddingRight="16dp"
-                        android:src="@drawable/ic_chevron_grey_24dp"
-                        android:tint="@color/colorDark" />
+                        <TextView
+                            android:id="@+id/analyticsTitle"
+                            style="@style/BaseText.Dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="32dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:paddingLeft="16dp"
+                            android:text="@string/title_analytics"
+                            android:textSize="24sp" />
 
-                    <TextView
-                        android:id="@+id/analyticsMonth"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignTop="@id/analyticsTitle"
-                        android:layout_alignBottom="@id/analyticsTitle"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_toRightOf="@id/analyticsTitle"
-                        android:background="@drawable/shape_rounded_light_64dp"
-                        android:gravity="center"
-                        android:paddingLeft="12dp"
-                        android:paddingRight="12dp"
-                        tools:text="Сентябрь" />
+                        <ImageView
+                            android:id="@+id/analyticsButton"
+                            style="?attr/actionButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/analyticsTitle"
+                            android:layout_alignBottom="@id/analyticsTitle"
+                            android:layout_alignParentRight="true"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:paddingLeft="16dp"
+                            android:paddingRight="16dp"
+                            android:src="@drawable/ic_chevron_grey_24dp"
+                            android:tint="@color/colorDark" />
 
-                    <TextView
-                        android:id="@+id/expectedIncomeAmount"
-                        style="@style/BaseText.Dark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/analyticsTitle"
-                        android:layout_alignParentStart="true"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="16dp"
-                        android:textSize="30sp"
-                        tools:text="27 000 ₽" />
+                        <TextView
+                            android:id="@+id/analyticsMonth"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignTop="@id/analyticsTitle"
+                            android:layout_alignBottom="@id/analyticsTitle"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_toRightOf="@id/analyticsTitle"
+                            android:background="@drawable/shape_rounded_light_64dp"
+                            android:gravity="center"
+                            android:paddingLeft="12dp"
+                            android:paddingRight="12dp"
+                            tools:text="Сентябрь" />
 
-                    <TextView
-                        android:id="@+id/expectedIncomeText"
-                        style="@style/BaseText.Light"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@id/expectedIncomeAmount"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingLeft="16dp"
-                        android:text="Ожидаемая прибыль"
-                        android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/expectedIncomeAmount"
+                            style="@style/BaseText.Dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/analyticsTitle"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="sans-serif-medium"
+                            android:paddingLeft="16dp"
+                            android:textSize="30sp"
+                            tools:text="27 000 ₽" />
 
-                    <TextView
-                        android:id="@+id/expectedTaxAmount"
-                        style="@style/BaseText.Dark"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@id/expectedTaxText"
-                        android:layout_alignParentRight="true"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingRight="16dp"
-                        android:textSize="24sp"
-                        tools:text="3 000 ₽" />
+                        <TextView
+                            android:id="@+id/expectedIncomeText"
+                            style="@style/BaseText.Light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/expectedIncomeAmount"
+                            android:fontFamily="sans-serif-medium"
+                            android:paddingLeft="16dp"
+                            android:text="Ожидаемая прибыль"
+                            android:textSize="14sp" />
 
-                    <TextView
-                        android:id="@+id/expectedTaxText"
-                        style="@style/BaseText.Light"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_above="@id/cardNameText"
-                        android:layout_alignParentRight="true"
-                        android:fontFamily="sans-serif-medium"
-                        android:paddingRight="16dp"
-                        android:text="Ожидаемый налог"
-                        android:textSize="14sp" />
+                        <TextView
+                            android:id="@+id/expectedTaxAmount"
+                            style="@style/BaseText.Dark"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_above="@+id/expectedTaxText"
+                            android:layout_alignTop="@id/expectedIncomeAmount"
+                            android:layout_alignBottom="@id/expectedIncomeAmount"
+                            android:layout_alignParentRight="true"
+                            android:fontFamily="sans-serif-medium"
+                            android:paddingRight="16dp"
+                            android:textSize="24sp"
+                            tools:text="3 000 ₽" />
+
+                        <TextView
+                            android:id="@+id/expectedTaxText"
+                            style="@style/BaseText.Light"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:fontFamily="sans-serif-medium"
+                            android:paddingRight="16dp"
+                            android:text="Ожидаемый налог"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
 
                     <TextView
                         android:id="@+id/cardNameText"
                         style="@style/BaseText.Dark"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@id/expectedIncomeText"
+                        android:layout_below="@id/analyticGroup"
                         android:layout_marginTop="40dp"
                         android:fontFamily="sans-serif-medium"
                         android:paddingLeft="16dp"
@@ -290,8 +300,8 @@
                                 <ImageView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:src="@drawable/ic_qr_code_dark_24dp"
-                                    android:tint="@color/colorBlack" />
+                                    android:src="@drawable/ic_requisites_black_16dp"
+                                    android:tint="@color/colorWhite" />
 
                                 <TextView
                                     android:layout_width="wrap_content"
@@ -301,7 +311,7 @@
                                     android:paddingTop="12dp"
                                     android:paddingBottom="12dp"
                                     android:text="Реквизиты"
-                                    android:textColor="@color/colorTextDark" />
+                                    android:textColor="@color/colorWhite" />
 
                             </LinearLayout>
 
@@ -370,6 +380,5 @@
         <include layout="@layout/fragment_requisites" />
 
     </androidx.cardview.widget.CardView>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

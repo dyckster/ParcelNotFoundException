@@ -15,17 +15,16 @@ class TimelineListMapper {
 
     fun map(items: List<TimelineEvent>): List<TimelineListItem> {
         val resultList: MutableList<TimelineListItem> = ArrayList()
-        items.groupBy { it.date }.toSortedMap()
+        items.asSequence().groupBy { it.date }.toSortedMap(reverseOrder())
             .forEach { entry ->
-
                 val day = entry.key
                 val date = SimpleDateFormat("yyyy-MM-dd", Locale("ru")).parse(day)
                 val dayFormatted = SimpleDateFormat("dd MMMM", Locale("ru")).format(date)
-                val balance = entry.value.sumBy { it.amount.amount.toInt() }
+                val balance = entry.value.sumBy { it.amount.toInt() }
                 val balanceString = if (balance >= 0) {
-                    "+ ${balance.separateThousands()} ₽"
+                    "+ ${balance.separateThousands(true)} ₽"
                 } else {
-                    "– ${balance.separateThousands()} ₽"
+                    "– ${balance.separateThousands(true)} ₽"
                 }
                 val dayToBalance = dayFormatted to balanceString
                 resultList.add(TimelineListItem(dayToBalance, ViewType.HEADER))

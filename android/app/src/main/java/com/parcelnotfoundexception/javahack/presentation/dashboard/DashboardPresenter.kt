@@ -1,12 +1,15 @@
 package com.parcelnotfoundexception.javahack.presentation.dashboard
 
 import com.arellomobile.mvp.InjectViewState
-import com.parcelnotfoundexception.javahack.domain.model.Client
+import com.parcelnotfoundexception.javahack.domain.model.*
 import com.parcelnotfoundexception.javahack.domain.repository.DashboardRepository
 import com.parcelnotfoundexception.javahack.presentation.BasePresenter
 import com.parcelnotfoundexception.javahack.presentation.dashboard.adapter.OptionItem
+import com.parcelnotfoundexception.javahack.util.separateThousands
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import java.text.SimpleDateFormat
+import java.util.*
 import javax.inject.Inject
 
 @InjectViewState
@@ -17,19 +20,38 @@ class DashboardPresenter @Inject constructor(
     @Inject
     lateinit var dashboardRepository: DashboardRepository
 
+    private var user: UserInfo? = null
+    private var account: Account? = null
+    private var card: Card? = null
+
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
         dashboardRepository.getDashboard()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
+
+                viewState.showUserInfo(it.user.fullName, it.user.userInn)
+
+                user = it.user
+                account = it.accounts.first()
+                card = account?.cards?.find { card -> card.cardType == CardType.VIRTUAL }?.apply {
+                    viewState.showCardInfo(
+                        displayName,
+                        if (cardType == CardType.VIRTUAL) "Виртуальная" else "Пластиковая",
+                        panTail,
+                        (balance / 100).separateThousands()
+                    )
+                }
+                viewState.showAnalyticsSection(
+                    SimpleDateFormat("MMMM", Locale("ru")).format(Date()),
+                    "${(it.timelineSummary.currentMonthCredit / 100).separateThousands()} ₽",
+                    "${(it.timelineSummary.currentMonthTax / 100).separateThousands()} ₽"
+                )
             }, {
 
             })
             .also { disposable.add(it) }
-        viewState.showAnalyticsSection("Сентябрь", "30 000 ₽", "2 700 ₽")
-        viewState.showUserInfo("Кристина Кравцова", "122122121")
-        viewState.showCardInfo("Карта для бизнеса", "Виртуальная", "*8888", "30 000")
 
         viewState.showUserClients(
             listOf(
@@ -47,7 +69,7 @@ class DashboardPresenter @Inject constructor(
     fun onMenuOptionClick(optionItem: OptionItem) {
         when (optionItem) {
             OptionItem.HISTORY -> {
-                viewState.openTimeline()
+                viewState.openTimeline(card!!.id)
             }
             OptionItem.REQUISITES -> {
                 viewState.openRequisites()
@@ -64,20 +86,22 @@ class DashboardPresenter @Inject constructor(
         viewState.showRequisitesTab()
         viewState.showRequisitesInfo(
             listOf(
-                "Получатель" to "Кристина Кравцова",
-                "БИК" to "0404040",
-                "ИНН" to "1111111",
-                "КПП" to "1111",
-                "Корр. Счет" to "12123123",
-                "Банк" to "Райф",
-                "Номер счета" to "121121111 11111"
+                "Получатель" to (user?.fullName ?: "Нет данных"),
+                "БИК банка" to (account?.requisitesModel?.bankBik ?: "Нет данных"),
+                "ИНН" to (account?.requisitesModel?.inn ?: "Нет данных"),
+                "Корр. Счет" to (account?.requisitesModel?.ogrnip ?: "Нет данных"),
+                "Бик получателя" to (account?.requisitesModel?.clientBik ?: "Нет данных"),
+                "Банк" to "Райффайзенбанк",
+                "Номер счета" to (account?.requisitesModel?.accountNumber ?: "Нет данных")
             )
         )
     }
 
     fun showQrTab() {
         viewState.showQrCodeTab()
-        viewState.showQrCode("https://www.figma.com/proto/7ZLB0XIlXle7GxFKArrlEm/Java-hack?node-id=17%3A228&viewport=-2429%2C-494%2C0.6746377348899841&scaling=scale-down")
+        card?.apply {
+            viewState.showQrCode(replenishUrl)
+        }
     }
 
 }

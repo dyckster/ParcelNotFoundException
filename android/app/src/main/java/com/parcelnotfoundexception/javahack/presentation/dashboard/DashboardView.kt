@@ -23,6 +23,6 @@ interface DashboardView : MvpView {
 
     fun showQrCode(link: String)
 
-    fun openTimeline()
+    fun openTimeline(cardId: String)
 
 }

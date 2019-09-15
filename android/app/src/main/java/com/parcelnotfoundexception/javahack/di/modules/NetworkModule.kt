@@ -31,6 +31,10 @@ class NetworkModule {
     ): OkHttpClient {
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(httpLoggingInterceptor)
+        httpClient.addInterceptor {
+            val request = it.request().newBuilder().addHeader("USER-ID", DEFAULT_USER_ID).build()
+            return@addInterceptor it.proceed(request)
+        }
         return httpClient.build()
     }
 
@@ -41,9 +45,13 @@ class NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
             .client(httpClient)
-            .baseUrl("http://64e2c9b6.ngrok.io/api/")
+            .baseUrl("http://ae0139d4.ngrok.io/api/")
             .build()
             .create(JavaHackApi::class.java)
+    }
+
+    companion object {
+        private const val DEFAULT_USER_ID = "066269f7-40e1-49bc-a612-366ef6de9f13"
     }
 
 }

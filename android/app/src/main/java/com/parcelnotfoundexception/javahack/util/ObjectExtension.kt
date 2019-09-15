@@ -27,11 +27,28 @@ fun Date.parseDate(pattern: String = "dd.mm.yyyy"): String {
     return format.format(this)
 }
 
-fun Int.separateThousands(): String {
+fun Int.separateThousands(hideMinus: Boolean = false): String {
     val formatter = NumberFormat.getInstance(Locale("RU")) as DecimalFormat
     val symbols = formatter.decimalFormatSymbols
 
     symbols.groupingSeparator = ' '
     formatter.decimalFormatSymbols = symbols
-    return formatter.format(this)
+
+    val formattedString = formatter.format(this)
+    return if (hideMinus) {
+        formattedString.replace("-", "")
+    } else formattedString
+}
+
+fun Long.separateThousands(hideMinus: Boolean = false): String {
+    val formatter = NumberFormat.getInstance(Locale("RU")) as DecimalFormat
+    val symbols = formatter.decimalFormatSymbols
+
+    symbols.groupingSeparator = ' '
+    formatter.decimalFormatSymbols = symbols
+
+    val formattedString = formatter.format(this)
+    return if (hideMinus) {
+        formattedString.replace("-", "")
+    } else formattedString
 }

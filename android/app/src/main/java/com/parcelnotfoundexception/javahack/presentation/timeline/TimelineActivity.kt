@@ -2,6 +2,7 @@ package com.parcelnotfoundexception.javahack.presentation.timeline
 
 import android.content.Context
 import android.content.Intent
+import android.view.MenuItem
 import android.widget.TextView
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
@@ -29,6 +30,9 @@ class TimelineActivity : BaseActivity(), TimelineView {
     private val monthsAdapter = TimelineMonthAdapter()
 
     override fun viewCreated() {
+        setSupportActionBar(toolbar)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        presenter.fetchTimeline(intent.getStringExtra(EXTRA_CARD_ID))
         timelineRecycler.adapter = timelineAdapter
 
         monthsList.adapter = monthsAdapter
@@ -37,9 +41,6 @@ class TimelineActivity : BaseActivity(), TimelineView {
             val selectedMonth = (viewHolder?.itemView as? TextView)?.text.toString()
             presenter.onMonthSelected(selectedMonth)
         }
-        val mList = listOf("Июнь", "Июль", "Август", "Сентябрь")
-        monthsAdapter.months = mList
-        monthsList.scrollToPosition(mList.size)
     }
 
     override fun onMonthDataSelected(
@@ -54,16 +55,32 @@ class TimelineActivity : BaseActivity(), TimelineView {
         blockTax.text = tax
     }
 
+    override fun prepareMonths(months: List<String>) {
+        monthsAdapter.months = months
+        monthsList.scrollToPosition(months.size)
+    }
+
+
     override fun setItems(items: List<TimelineListItem>) {
         timelineAdapter.items = items
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            onBackPressed()
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun layoutRes() = R.layout.activity_timeline
 
     companion object {
 
-        fun start(context: Context) {
+        private const val EXTRA_CARD_ID = "card_id"
+
+        fun start(context: Context, cardId: String) {
             val intent = Intent(context, TimelineActivity::class.java)
+            intent.putExtra(EXTRA_CARD_ID, cardId)
             context.startActivity(intent)
         }
 

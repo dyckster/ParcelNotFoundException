@@ -54,6 +54,7 @@ class DashboardActivity : BaseActivity(), DashboardView {
         requisitesButtonCard.setOnClickListener { presenter.onMenuOptionClick(OptionItem.REQUISITES) }
         analyticsButton.setOnClickListener { presenter.onMenuOptionClick(OptionItem.HISTORY) }
         qrButton.setOnClickListener { presenter.onMenuOptionClick(OptionItem.QR_CODE) }
+        analyticGroup.setOnClickListener { presenter.onMenuOptionClick(OptionItem.HISTORY) }
     }
 
     override fun showAnalyticsSection(month: String, expectedIncome: String, expectedTax: String) {
@@ -83,8 +84,8 @@ class DashboardActivity : BaseActivity(), DashboardView {
         clientInn.text = inn
     }
 
-    override fun openTimeline() {
-        TimelineActivity.start(this)
+    override fun openTimeline(cardId: String) {
+        TimelineActivity.start(this, cardId)
     }
 
     override fun openRequisites() {

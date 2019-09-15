@@ -1,10 +1,10 @@
 package com.parcelnotfoundexception.javahack.domain.repository
 
-import com.parcelnotfoundexception.javahack.domain.model.TimelineEvent
+import com.parcelnotfoundexception.javahack.domain.model.TimelineModel
 import io.reactivex.Single
 
 interface TimelineRepository {
 
-    fun getTimeline(): Single<List<TimelineEvent>>
+    fun getTimeline(cardId: String): Single<TimelineModel>
 
 }
