@@ -48,13 +48,17 @@ public class DashboardResource {
             DashboardData dashboardData = new DashboardData();
             dashboardData.setUser(userInfo);
             dashboardData.setAccounts(dashboardService.getAccounts(userId));
+            // Меня очень попросила наша дизайнер
+            String cardId = dashboardData.getAccounts().get(0).getCards().get(0).getId();
+
+            dashboardData.setTimelineSummary(timelineService.getTimelineSummary(cardId));
             return ResponseEntity.ok(dashboardData);
         }
         return ResponseEntity.badRequest().build();
     }
 
     @RequestMapping(value = "/partners/{inn}", method = RequestMethod.GET)
-    @ApiOperation(value = "Получение данных по контрагенту", response = DashboardData.class)
+    @ApiOperation(value = "Получение данных по контрагенту", response = FnsSearchResponse.class)
     public ResponseEntity<FnsSearchResponse> fnsSearchResponse(@PathVariable("inn") @NotNull
                                                                        String inn) {
         FnsSearchResponse fnsSearchResponse = fnsDao.searchByInn(inn);
@@ -62,7 +66,7 @@ public class DashboardResource {
     }
 
     @RequestMapping(value = "/operations/{cardId}", method = RequestMethod.GET)
-    @ApiOperation(value = "Получение ленты операций", response = DashboardData.class)
+    @ApiOperation(value = "Получение ленты операций", response = OperationsView.class)
     public ResponseEntity<OperationsView> operations(@ApiParam(value = "USER-ID")
                                                             @RequestHeader(value = "USER-ID", required = true)
                                                                     String userId, @PathVariable("cardId") @NotNull
@@ -76,7 +80,7 @@ public class DashboardResource {
     }
 
     @RequestMapping(value = "/requisites/{cardId}", method = RequestMethod.GET)
-    @ApiOperation(value = "Получение данных для главного экрана", response = DashboardData.class)
+    @ApiOperation(value = "Получение реквизитов виртуальной карты", response = CardRequisites.class)
     public ResponseEntity<CardRequisites> cardRequisites(@ApiParam(value = "USER-ID")
                                                             @RequestHeader(value = "USER-ID", required = true)
                                                                     String userId, @PathVariable("cardId") @NotNull

@@ -22,6 +22,7 @@ public class AuthService {
         if (userEntity.isPresent()) {
             userInfo.setProfileType(userEntity.get().getProfileType());
             userInfo.setFullName(userEntity.get().getFullName());
+            userInfo.setUserInn(userEntity.get().getUserInn());
         } else {
             userInfo = null;
         }

@@ -11,5 +11,7 @@ public class UserInfo {
     private String fullName;
     @ApiModelProperty(required = true, value = "Тип пользователя: INDIVIDUAL,CORPORATE,SELF_EMPLOYED")
     private String profileType;
+    @ApiModelProperty(required = false, value = "ИНН пользователя")
+    private String userInn;
 
 }
