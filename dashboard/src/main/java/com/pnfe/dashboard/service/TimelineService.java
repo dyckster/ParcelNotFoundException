@@ -20,7 +20,12 @@ public class TimelineService {
     @Autowired
     OperationsRepository operationsRepository;
 
-    public OperationsView getTimeline (String cardId) {
+    public static final long ZERO_RUB = 0L;
+    public static final double INDIVIDUAL_TAX_PERCENT = 4.0;
+    public static final double BUSINESS_TAX_AMOUNT = 6.0;
+
+
+    public OperationsView getTimeline(String cardId) {
         OperationsView operationsView = new OperationsView();
         List<OperationView> operations = getOperations(cardId);
         operationsView.setOperations(operations);
@@ -30,7 +35,11 @@ public class TimelineService {
 
     private List<OperationView> getOperations(String cardId) {
         List<OperationEntity> operationEntities = operationsRepository.findByCardId(cardId);
-        List<OperationView> operationViews = operationEntities.stream().map(operationEntity -> {
+        return convertOperations(operationEntities);
+    }
+
+    private List<OperationView> convertOperations(List<OperationEntity> operationEntities) {
+        return operationEntities.stream().map(operationEntity -> {
             OperationView operationView = new OperationView();
             operationView.setTaxPercent(getTaxPercentage(operationEntity.getCreditType()));
 
@@ -46,44 +55,43 @@ public class TimelineService {
             }
             return operationView;
         }).collect(Collectors.toList());
-        return operationViews;
     }
 
-    private TotalAmount getTotalAmount (List<OperationView> operations) {
+    private TotalAmount getTotalAmount(List<OperationView> operations) {
         TotalAmount totalAmount = new TotalAmount();
         Long amountCredit = operations
                 .stream()
-                .filter(op -> op.getAmount() > 0L)
+                .filter(op -> op.getAmount() > ZERO_RUB)
                 .map(OperationView::getAmount)
-                .reduce(0L, Long::sum);
+                .reduce(ZERO_RUB, Long::sum);
         totalAmount.setTotalCredit(amountCredit);
 
         Long amountDebit = operations
                 .stream()
-                .filter(op -> op.getAmount() < 0L)
+                .filter(op -> op.getAmount() < ZERO_RUB)
                 .map(OperationView::getAmount)
-                .reduce(0L, Long::sum);
+                .reduce(ZERO_RUB, Long::sum);
 
         totalAmount.setTotalDebit(amountDebit);
 
         Long amountTax = operations
                 .stream()
                 .map(OperationView::getTaxAmount)
-                .reduce(0L, Long::sum);
+                .reduce(ZERO_RUB, Long::sum);
         totalAmount.setTotalTax(amountTax);
 
         Map<Month, Long> creditByMonth = operations
                 .stream()
-                .filter(op -> op.getAmount() > 0L)
-                .collect(Collectors.groupingBy(p -> p.getOperDate().getMonth(),Collectors.summingLong(OperationView::getAmount)));
+                .filter(op -> op.getAmount() > ZERO_RUB)
+                .collect(Collectors.groupingBy(p -> p.getOperDate().getMonth(), Collectors.summingLong(OperationView::getAmount)));
 
         List<Map<Month, Long>> monthlyCredit = new ArrayList<>();
         monthlyCredit.add(creditByMonth);
 
         Map<Month, Long> debitByMonth = operations
                 .stream()
-                .filter(op -> op.getAmount() < 0L)
-                .collect(Collectors.groupingBy(p -> p.getOperDate().getMonth(),Collectors.summingLong(OperationView::getAmount)));
+                .filter(op -> op.getAmount() < ZERO_RUB)
+                .collect(Collectors.groupingBy(p -> p.getOperDate().getMonth(), Collectors.summingLong(OperationView::getAmount)));
 
         List<Map<Month, Long>> monthlyDebit = new ArrayList<>();
         monthlyDebit.add(debitByMonth);
@@ -91,8 +99,8 @@ public class TimelineService {
 
         Map<Month, Long> taxByMonth = operations
                 .stream()
-                .filter(op -> op.getTaxAmount()!=0L)
-                .collect(Collectors.groupingBy(p -> p.getOperDate().getMonth(),Collectors.summingLong(OperationView::getTaxAmount)));
+                .filter(op -> op.getTaxAmount() != ZERO_RUB)
+                .collect(Collectors.groupingBy(p -> p.getOperDate().getMonth(), Collectors.summingLong(OperationView::getTaxAmount)));
 
         List<Map<Month, Long>> monthlyTax = new ArrayList<>();
         monthlyTax.add(taxByMonth);
@@ -105,11 +113,12 @@ public class TimelineService {
         return totalAmount;
     }
 
-    public TimelineSummary getTimelineSummary(String cardId){
+    public TimelineSummary getTimelineSummary(String cardId) {
         List<OperationView> operations = getOperations(cardId);
         Long creditByCurrentMonth = operations
                 .stream()
-                .filter(op -> op.getAmount() > 0L && LocalDate.now().getMonth().equals(op.getOperDate().getMonth()))
+                .filter(op -> op.getAmount() > ZERO_RUB
+                        && LocalDate.now().getMonth().equals(op.getOperDate().getMonth()))
                 .mapToLong(OperationView::getAmount)
                 .sum();
 
@@ -127,9 +136,9 @@ public class TimelineService {
         if (creditType != null) {
             switch (creditType) {
                 case "individual":
-                    return 4.0;
+                    return INDIVIDUAL_TAX_PERCENT;
                 case "business":
-                    return 6.0;
+                    return BUSINESS_TAX_AMOUNT;
             }
         }
         return 0.0;
