@@ -1,7 +1,6 @@
 package com.pnfe.dashboard.dao;
 
 import com.pnfe.dashboard.dto.fns.FnsSearchResponse;
-import com.pnfe.dashboard.dto.fns.FnsSearchResult;
 import org.apache.http.entity.ContentType;
 import org.slf4j.MDC;
 import org.springframework.http.HttpEntity;
@@ -10,8 +9,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
-import javax.annotation.PostConstruct;
 
 @Service
 public class FnsDao {

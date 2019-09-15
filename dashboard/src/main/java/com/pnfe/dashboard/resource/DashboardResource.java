@@ -1,14 +1,13 @@
 package com.pnfe.dashboard.resource;
 
 import com.pnfe.dashboard.dao.FnsDao;
-import com.pnfe.dashboard.dto.CardType;
-import com.pnfe.dashboard.dto.CardView;
-import com.pnfe.dashboard.dto.DashboardData;
-import com.pnfe.dashboard.dto.UserInfo;
+import com.pnfe.dashboard.dto.*;
 import com.pnfe.dashboard.dto.fns.FnsSearchResponse;
 import com.pnfe.dashboard.dto.fns.FnsSearchResult;
+import com.pnfe.dashboard.entity.OperationEntity;
 import com.pnfe.dashboard.service.AuthService;
 import com.pnfe.dashboard.service.DashboardService;
+import com.pnfe.dashboard.service.TimelineService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,6 +32,9 @@ public class DashboardResource {
     DashboardService dashboardService;
 
     @Autowired
+    TimelineService timelineService;
+
+    @Autowired
     FnsDao fnsDao;
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
@@ -54,9 +56,23 @@ public class DashboardResource {
     @RequestMapping(value = "/partners/{inn}", method = RequestMethod.GET)
     @ApiOperation(value = "Получение данных по контрагенту", response = DashboardData.class)
     public ResponseEntity<FnsSearchResponse> fnsSearchResponse(@PathVariable("inn") @NotNull
-                                                                   String inn) {
+                                                                       String inn) {
         FnsSearchResponse fnsSearchResponse = fnsDao.searchByInn(inn);
         return ResponseEntity.ok(fnsSearchResponse);
+    }
+
+    @RequestMapping(value = "/operations/{cardId}", method = RequestMethod.GET)
+    @ApiOperation(value = "Получение ленты операций", response = DashboardData.class)
+    public ResponseEntity<List<OperationView>> operations(@ApiParam(value = "USER-ID")
+                                                            @RequestHeader(value = "USER-ID", required = true)
+                                                                    String userId, @PathVariable("cardId") @NotNull
+                                                                    String cardId) {
+
+        UserInfo userInfo = authService.retrieveUserInfo(userId);
+        if (userInfo != null) {
+            return ResponseEntity.ok(timelineService.getOperations(cardId));
+        }
+        return ResponseEntity.badRequest().build();
     }
 
 
