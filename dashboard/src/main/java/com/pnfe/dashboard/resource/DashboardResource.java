@@ -75,5 +75,19 @@ public class DashboardResource {
         return ResponseEntity.badRequest().build();
     }
 
+    @RequestMapping(value = "/requisites/{cardId}", method = RequestMethod.GET)
+    @ApiOperation(value = "Получение данных для главного экрана", response = DashboardData.class)
+    public ResponseEntity<CardRequisites> cardRequisites(@ApiParam(value = "USER-ID")
+                                                            @RequestHeader(value = "USER-ID", required = true)
+                                                                    String userId, @PathVariable("cardId") @NotNull
+                                                                    String cardId) {
+
+        UserInfo userInfo = authService.retrieveUserInfo(userId);
+        if (userInfo != null) {
+            return ResponseEntity.ok(dashboardService.getCardRequisites(cardId));
+        }
+        return ResponseEntity.badRequest().build();
+    }
+
 
 }

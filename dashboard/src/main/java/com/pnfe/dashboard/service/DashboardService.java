@@ -1,6 +1,7 @@
 package com.pnfe.dashboard.service;
 
 import com.pnfe.dashboard.dto.Account;
+import com.pnfe.dashboard.dto.CardRequisites;
 import com.pnfe.dashboard.dto.CardView;
 import com.pnfe.dashboard.dto.Requisite;
 import com.pnfe.dashboard.entity.AccountsEntity;
@@ -14,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -64,6 +66,19 @@ public class DashboardService {
             return cardView;
         }).collect(Collectors.toList());
         return cards;
+    }
+
+    public CardRequisites getCardRequisites(String cardId) {
+        return cardsRepository.findById(cardId).map(c -> {
+            CardRequisites cardRequisites = new CardRequisites();
+            try {
+                BeanUtils.copyProperties(c, cardRequisites);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return cardRequisites;
+        })
+                .orElseThrow(IllegalArgumentException::new);
     }
 
 }
