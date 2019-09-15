@@ -2,11 +2,13 @@ package com.pnfe.dashboard.resource;
 
 import com.pnfe.dashboard.dao.FnsDao;
 import com.pnfe.dashboard.dto.*;
+import com.pnfe.dashboard.dto.fns.CompanyDescription;
 import com.pnfe.dashboard.dto.fns.FnsSearchResponse;
 import com.pnfe.dashboard.dto.fns.FnsSearchResult;
 import com.pnfe.dashboard.entity.OperationEntity;
 import com.pnfe.dashboard.service.AuthService;
 import com.pnfe.dashboard.service.DashboardService;
+import com.pnfe.dashboard.service.FnsService;
 import com.pnfe.dashboard.service.TimelineService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +37,7 @@ public class DashboardResource {
     TimelineService timelineService;
 
     @Autowired
-    FnsDao fnsDao;
+    FnsService fnsService;
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     @ApiOperation(value = "Получение данных для главного экрана", response = DashboardData.class)
@@ -58,11 +60,11 @@ public class DashboardResource {
     }
 
     @RequestMapping(value = "/partners/{inn}", method = RequestMethod.GET)
-    @ApiOperation(value = "Получение данных по контрагенту", response = FnsSearchResponse.class)
-    public ResponseEntity<FnsSearchResponse> fnsSearchResponse(@PathVariable("inn") @NotNull
+    @ApiOperation(value = "Получение данных по контрагенту", response = CompanyDescription.class)
+    public ResponseEntity<List<CompanyDescription>> fnsSearchResponse(@PathVariable("inn") @NotNull
                                                                        String inn) {
-        FnsSearchResponse fnsSearchResponse = fnsDao.searchByInn(inn);
-        return ResponseEntity.ok(fnsSearchResponse);
+        List<CompanyDescription> companyDescriptions = fnsService.mapCompanyDescriptions(inn);
+        return ResponseEntity.ok(companyDescriptions);
     }
 
     @RequestMapping(value = "/operations/{cardId}", method = RequestMethod.GET)
