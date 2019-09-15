@@ -20,7 +20,7 @@ class TimelineListMapper {
                 val day = entry.key
                 val date = SimpleDateFormat("yyyy-MM-dd", Locale("ru")).parse(day)
                 val dayFormatted = SimpleDateFormat("dd MMMM", Locale("ru")).format(date)
-                val balance = entry.value.sumBy { it.amount.toInt() }
+                val balance = entry.value.sumBy { it.amount.toInt() } / 100
                 val balanceString = if (balance >= 0) {
                     "+ ${balance.separateThousands(true)} ₽"
                 } else {

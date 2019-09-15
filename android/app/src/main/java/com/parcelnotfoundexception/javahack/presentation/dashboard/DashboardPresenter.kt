@@ -44,7 +44,7 @@ class DashboardPresenter @Inject constructor(
                     )
                 }
                 viewState.showAnalyticsSection(
-                    SimpleDateFormat("MMMM", Locale("ru")).format(Date()),
+                    "Сентябрь",
                     "${(it.timelineSummary.currentMonthCredit / 100).separateThousands()} ₽",
                     "${(it.timelineSummary.currentMonthTax / 100).separateThousands()} ₽"
                 )

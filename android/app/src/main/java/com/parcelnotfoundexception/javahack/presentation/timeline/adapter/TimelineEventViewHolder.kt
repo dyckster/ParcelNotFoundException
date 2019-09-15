@@ -26,9 +26,9 @@ class TimelineEventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 .into(eventIcon)
             val amount = event.amount
             val amountString = if (amount >= 0) {
-                "+ ${amount.separateThousands()} ₽"
+                "+ ${(amount / 100).separateThousands()} ₽"
             } else {
-                "– ${amount.separateThousands(true)} ₽"
+                "– ${(amount / 100).separateThousands(true)} ₽"
             }
             eventSum.text = amountString
             eventTitle.text = event.displayName
@@ -45,7 +45,7 @@ class TimelineEventViewHolder(view: View) : RecyclerView.ViewHolder(view) {
                 taxAmount.show()
                 taxPercent.show()
 
-                taxAmount.text = "${event.taxAmount?.separateThousands()} ₽"
+                taxAmount.text = "${(event.taxAmount?.div(100))?.separateThousands()} ₽"
                 taxPercent.text = "${event.taxPercent.toString()} %"
             } else {
                 taxAmount.hide()

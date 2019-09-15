@@ -102,7 +102,8 @@ class DashboardActivity : BaseActivity(), DashboardView {
 
     override fun showRequisitesTab() {
         requisitesButton.animate().setDuration(150L).alpha(1.0f)
-        requisitesButton.setBackgroundResource(R.drawable.shape_rounded_light_64dp)
+        requisitesButtonIcon.animate().setDuration(150L).alpha(1.0f)
+        requisitesButtonGroup.setBackgroundResource(R.drawable.shape_rounded_light_64dp)
 
         qrButtonGroup.background = null
         qrButtonIcon.animate().setDuration(150L).alpha(0.4f)
@@ -111,7 +112,8 @@ class DashboardActivity : BaseActivity(), DashboardView {
 
     override fun showQrCodeTab() {
         requisitesButton.animate().setDuration(150L).alpha(0.4f)
-        requisitesButton.background = null
+        requisitesButtonIcon.animate().setDuration(150L).alpha(0.4f)
+        requisitesButtonGroup.background = null
 
         qrButtonGroup.setBackgroundResource(R.drawable.shape_rounded_light_64dp)
         qrButtonIcon.animate().setDuration(150L).alpha(1.0f)

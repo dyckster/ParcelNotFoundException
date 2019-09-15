@@ -35,15 +35,15 @@
             android:textSize="12sp" />
 
         <TextView
-            android:layout_width="match_parent"
             android:id="@+id/taxPayMonth"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/taxText"
             android:layout_marginLeft="16dp"
             android:layout_toRightOf="@id/taxIcon"
+            android:text="За август"
             android:textColor="@color/colorWhite"
-            android:textSize="18sp"
-            tools:text="За август" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/taxSum"
@@ -53,9 +53,9 @@
             android:layout_marginTop="24dp"
             android:layout_marginRight="16dp"
             android:fontFamily="sans-serif-medium"
+            android:text="76 ₽"
             android:textColor="@color/colorWhite"
-            android:textSize="24sp"
-            tools:text="5000 ₽" />
+            android:textSize="24sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -68,12 +68,33 @@
             android:weightSum="2">
 
             <TextView
-                android:id="@+id/taxPayButton"
+                android:id="@+id/taxInfoButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginTop="40dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="24dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_rounded_white_stroke_24dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingLeft="40dp"
+                android:paddingTop="8dp"
+                android:paddingRight="40dp"
+                android:paddingBottom="8dp"
+                android:text="Информация"
+                android:textColor="@color/colorWhite"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/taxPayButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="4dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom="24dp"
                 android:layout_weight="1"
                 android:background="@drawable/shape_rouned_24dp"
                 android:fontFamily="sans-serif-medium"
