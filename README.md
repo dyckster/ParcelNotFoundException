@@ -2,23 +2,23 @@
 Раздел, разработанный в рамках хакатона JAVA HACK от Райффайзенбанка 14.09.2019 - 15.09.2019
 
 
-Дашборд
+### Дашборд
 
 ![ParcelNotFoundException](assets/dashboard.gif)
 
-Перевод по QR-коду
+### Перевод по QR-коду
 
 ![ParcelNotFoundException](assets/qrcode.gif)
 
-Аналитика операций
+### Аналитика операций
 
 ![ParcelNotFoundException](assets/timeline.gif)
 
-Оплата налога
+### Оплата налога
 
 ![ParcelNotFoundException](assets/taxpay.gif)
 
-Весь дашборд
+### Весь дашборд
 
 ![ParcelNotFoundException](assets/dashboard_all.gif)
 
